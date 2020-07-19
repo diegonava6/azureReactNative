@@ -1,11 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react';
 import {
   SafeAreaView,
@@ -14,6 +6,7 @@ import {
   View,
   Text,
   StatusBar,
+  Button
 } from 'react-native';
 
 import {
@@ -24,28 +17,43 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-const App: () => React$Node = () => {
-  return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Hello World</Text>
-              <Text style={styles.sectionDescription}>
-                This is an example app for Azure App Service.
-                It works in Android and iOS.
-              </Text>
+import Crashes from 'appcenter-crashes';
+import Analytics from 'appcenter-analytics';
+
+class App extends React.Component {
+  throwError = () => {
+    Crashes.generateTestCrash();
+  }
+
+  trackEvent = () => {
+    Analytics.trackEvent('Test Event Tracked');
+  }
+
+  render() {
+    return (
+      <>
+        <StatusBar barStyle="dark-content" />
+        <SafeAreaView>
+          <ScrollView
+            contentInsetAdjustmentBehavior="automatic"
+            style={styles.scrollView}>
+            <Header />
+            <View style={styles.body}>
+              <View style={styles.sectionContainer}>
+                <Text style={styles.sectionTitle}>Hello World</Text>
+                <Text style={styles.sectionDescription}>
+                  This is an example app for Azure App Service.
+                  It works in Android and iOS.
+                </Text>
+                <Button title='Crash' onPress={this.throwError}/>
+                <Button title='Track Event' onPress={this.trackEvent}/>
+              </View>
             </View>
-            </View>
-        </ScrollView>
-      </SafeAreaView>
-    </>
-  );
+          </ScrollView>
+        </SafeAreaView>
+      </>
+    );
+  }
 };
 
 const styles = StyleSheet.create({
