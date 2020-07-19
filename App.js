@@ -38,6 +38,7 @@ const App: () => React$Node = () => {
               <Text style={styles.sectionTitle}>Hello World</Text>
               <Text style={styles.sectionDescription}>
                 This is an example app for Azure App Service.
+                It works in Android and iOS.
               </Text>
             </View>
             </View>
