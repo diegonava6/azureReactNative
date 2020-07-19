@@ -43,7 +43,7 @@ class App extends React.Component {
                 <Text style={styles.sectionTitle}>Hello World</Text>
                 <Text style={styles.sectionDescription}>
                   This is an example app for Azure App Service.
-                  It works in Android and iOS.
+                  It works in Android and iOS!
                 </Text>
                 <Button title='Crash' onPress={this.throwError}/>
                 <Button title='Track Event' onPress={this.trackEvent}/>
