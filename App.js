@@ -6,27 +6,33 @@ import {
   View,
   Text,
   StatusBar,
-  Button
+  Button,
+  TextInput
 } from 'react-native';
 
 import {
   Header,
-  LearnMoreLinks,
   Colors,
-  DebugInstructions,
-  ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
 import Crashes from 'appcenter-crashes';
 import Analytics from 'appcenter-analytics';
 
 class App extends React.Component {
+  state = {
+    text: '6'
+  }
+
   throwError = () => {
     Crashes.generateTestCrash();
   }
 
   trackEvent = () => {
     Analytics.trackEvent('Test Event Tracked');
+  }
+
+  onChangeText = (text) => {
+    this.setState({ text })
   }
 
   render() {
@@ -39,14 +45,22 @@ class App extends React.Component {
             style={styles.scrollView}>
             <Header />
             <View style={styles.body}>
-              <View style={styles.sectionContainer}>
+              <View style={styles.sectionContainer} accessibilityLabel='test_1'>
                 <Text style={styles.sectionTitle}>Hello World</Text>
                 <Text style={styles.sectionDescription}>
                   This is an example app for Azure App Service.
                   It works in Android and iOS!
                 </Text>
-                <Button title='Crash' onPress={this.throwError}/>
-                <Button title='Track Event' onPress={this.trackEvent}/>
+                <Button style={{ marginTop: '5px'}} title='Crash' onPress={this.throwError} />
+                <Button style={{ marginTop: '5px'}} title='Track Event' onPress={this.trackEvent} />
+                <TextInput
+                  style={{ height: 40, width: 100, borderColor: 'gray', borderWidth: 1 }}
+                  onChangeText={this.onChangeText}
+                  value={this.state.text}
+                />
+                <View style={{ margin: 20 }}> 
+                  <Text>:)</Text>
+                </View>
               </View>
             </View>
           </ScrollView>
